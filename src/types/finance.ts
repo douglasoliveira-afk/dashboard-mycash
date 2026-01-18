@@ -11,6 +11,17 @@ export interface Transaction {
     installments?: string; // e.g. "1/12"
 }
 
+export interface Account {
+    id: string;
+    name: string;
+    balance: number;
+    type: 'bank' | 'wallet';
+    institution: string; // 'nubank', 'inter', 'picpay'
+    color: string;
+    dueDate?: number; // e.g. 21
+    lastDigits?: string; // e.g. "5897"
+}
+
 export interface FinanceSummary {
     totalBalance: number;
     totalIncome: number;
@@ -19,7 +30,11 @@ export interface FinanceSummary {
 
 export interface FinanceContextData {
     transactions: Transaction[];
+    filteredTransactions: Transaction[];
+    accounts: Account[];
     summary: FinanceSummary;
+    currentDate: Date;
+    setCurrentDate: (date: Date) => void;
     addTransaction: (transaction: Omit<Transaction, 'id'>) => void;
     removeTransaction: (id: string) => void;
 }
