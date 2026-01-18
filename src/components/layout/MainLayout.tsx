@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
+import { MobileHeader } from './MobileHeader';
 import { cn } from '../../utils/cn';
 
 export function MainLayout() {
@@ -8,6 +9,9 @@ export function MainLayout() {
 
     return (
         <div className="min-h-screen bg-neutral-100 font-sans text-neutral-1000">
+            {/* Mobile Header (md:hidden) */}
+            <MobileHeader />
+
             {/* Sidebar - Desktop Only (Fixed) */}
             <Sidebar
                 isCollapsed={isSidebarCollapsed}

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Target, CreditCard, ArrowRightLeft, User, ChevronLeft, ChevronRight, Zap } from 'lucide-react'; // Zap as placeholder logo
+import { ChevronLeft, ChevronRight, Zap } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import { NAV_ITEMS } from '../../config/navItems';
 
 type NavItemProps = {
     to: string;
@@ -48,7 +49,6 @@ export function Sidebar({ isCollapsed, toggleCheck }: SidebarProps) {
                 <div className="flex items-center gap-2">
                     {/* Logo Mark */}
                     <div className="w-8 h-8 flex-shrink-0 bg-neutral-1000 rounded-lg flex items-center justify-center text-brand-500">
-                        {/* Abstract Logo */}
                         <Zap className="w-5 h-5 fill-current" />
                     </div>
 
@@ -60,18 +60,10 @@ export function Sidebar({ isCollapsed, toggleCheck }: SidebarProps) {
                     )}
                 </div>
 
-                {/* Toggle Button */}
                 <button
                     onClick={toggleCheck}
                     className={cn(
                         "p-1.5 rounded-full hover:bg-neutral-100 text-neutral-500 transition-colors",
-                        isCollapsed && "hidden" // Hide toggle if collapsed? Or move it? 
-                        // Actually, if hidden when collapsed, how to expand?
-                        // Usually keeping it or moving it to a specific spot.
-                        // Let's keep it visible but maybe centered if collapsed?
-                        // "isCollapsed ? 'hidden'" logic is bad for UX if no other way to expand.
-                        // But looking at the design, the arrow is IN the header.
-                        // I'll keep it.
                     )}
                 >
                     {isCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
@@ -80,22 +72,24 @@ export function Sidebar({ isCollapsed, toggleCheck }: SidebarProps) {
 
             {/* Navigation */}
             <nav className="flex-1 space-y-2">
-                <NavItem to="/" icon={Home} label="Home" isCollapsed={isCollapsed} />
-                <NavItem to="/goals" icon={Target} label="Objetivos" isCollapsed={isCollapsed} />
-                <NavItem to="/cards" icon={CreditCard} label="Cartões" isCollapsed={isCollapsed} />
-                <NavItem to="/transactions" icon={ArrowRightLeft} label="Transações" isCollapsed={isCollapsed} />
-                <NavItem to="/profile" icon={User} label="Perfil" isCollapsed={isCollapsed} />
+                {NAV_ITEMS.map((item) => (
+                    <NavItem
+                        key={item.path}
+                        to={item.path}
+                        icon={item.icon}
+                        label={item.label}
+                        isCollapsed={isCollapsed}
+                    />
+                ))}
             </nav>
 
             {/* Footer: User Profile */}
             <div className={cn("mt-auto border-t border-neutral-200 pt-6", isCollapsed && "border-none pt-4")}>
                 <div className={cn("flex items-center gap-3", isCollapsed ? "justify-center" : "px-2")}>
-                    {/* Avatar */}
                     <div className="w-10 h-10 rounded-full bg-neutral-200 overflow-hidden flex-shrink-0">
                         <img src="https://github.com/shadcn.png" alt="Lucas Marte" className="w-full h-full object-cover" />
                     </div>
 
-                    {/* User Info */}
                     {!isCollapsed && (
                         <div className="flex-1 min-w-0">
                             <p className="text-sm font-bold text-neutral-1000 truncate">Lucas Marte</p>
