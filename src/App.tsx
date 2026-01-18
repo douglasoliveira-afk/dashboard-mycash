@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
+import { FinanceProvider } from './context/FinanceContext';
 
 // Placeholder Pages
 function Dashboard() {
@@ -22,15 +23,17 @@ function PlaceholderPage({ title }: { title: string }) {
 
 function App() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/goals" element={<PlaceholderPage title="Objetivos" />} />
-        <Route path="/cards" element={<PlaceholderPage title="Cartões" />} />
-        <Route path="/transactions" element={<PlaceholderPage title="Transações" />} />
-        <Route path="/profile" element={<PlaceholderPage title="Perfil" />} />
-      </Route>
-    </Routes>
+    <FinanceProvider>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/goals" element={<PlaceholderPage title="Objetivos" />} />
+          <Route path="/cards" element={<PlaceholderPage title="Cartões" />} />
+          <Route path="/transactions" element={<PlaceholderPage title="Transações" />} />
+          <Route path="/profile" element={<PlaceholderPage title="Perfil" />} />
+        </Route>
+      </Routes>
+    </FinanceProvider>
   );
 }
 
