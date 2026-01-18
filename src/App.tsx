@@ -3,11 +3,20 @@ import { MainLayout } from './components/layout/MainLayout';
 import { FinanceProvider } from './context/FinanceContext';
 
 // Placeholder Pages
+import { SummaryCards } from './components/features/dashboard/SummaryCards';
+
+// Pages
 function Dashboard() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-neutral-1000 mb-2">Home</h1>
-      <p className="text-neutral-500">Visão geral do sistema.</p>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-neutral-1000">Home</h1>
+        <button className="bg-neutral-1000 text-brand-500 px-4 py-2 rounded-lg font-bold text-sm hover:bg-neutral-800 transition-colors">
+          + Nova transação
+        </button>
+      </div>
+
+      <SummaryCards />
     </div>
   );
 }
